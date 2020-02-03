@@ -2,7 +2,7 @@
 
 <font color="rgb(100,100,200)"> Flutter Paint App Version 0.0.1</font>
 
-<img src="https://user-images.githubusercontent.com/21178803/71976201-c85e7100-3226-11ea-9fb7-88461654be1a.png" height="750" width="320">
+<img src="https://user-images.githubusercontent.com/21178803/73696567-93422300-46ed-11ea-8b30-fe63a6c44d47.png" height="750" width="320">
 
 
 ## Installation
