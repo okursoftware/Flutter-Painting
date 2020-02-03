@@ -14,6 +14,10 @@ class MyApp extends StatelessWidget {
           title: Text('Flutter Painting AppBar'),
         ),*/
         body: MainView(),
+        floatingActionButton: FloatingActionButton(
+          onPressed: null,
+          child: Icon(Icons.save),
+        ),
       ),
     );
   }
@@ -27,7 +31,7 @@ class MainView extends StatefulWidget {
 class _MainViewState extends State<MainView> {
   List<Offset> _offsets = [];
   Color activeColor;
-
+  List<Color> _colors = [];
   void onChangeColor(Color value) {
     activeColor = value;
   }
@@ -42,15 +46,17 @@ class _MainViewState extends State<MainView> {
               _object.globalToLocal(details.globalPosition);
 
           _offsets.add(_locationPoints);
+          _colors.add(activeColor);
         });
       },
       onPanEnd: (details) {
         _offsets.add(null);
+        _colors.add(null);
       },
       child: Stack(
         children: <Widget>[
           CustomPaint(
-            painter: MyPainter(_offsets, activeColor),
+            painter: MyPainter(offsets: _offsets, colors: _colors),
             size: Size.infinite,
           ),
           new ListTile(
@@ -82,20 +88,22 @@ class _MainViewState extends State<MainView> {
 
 class MyPainter extends CustomPainter {
   final List<Offset> offsets;
-  final Color activeColor;
+  //final Color activeColor;
+  final List<Color> colors;
   final brush = Paint()
     ..strokeCap = StrokeCap.round
     ..strokeWidth = 4.0
     ..color = Colors.red
     ..isAntiAlias = true;
 
-  MyPainter(this.offsets, this.activeColor);
+  MyPainter({@required this.offsets, @required this.colors});
 
   @override
   void paint(Canvas canvas, Size size) {
-    brush.color = activeColor == null ? Colors.red : activeColor;
+    debugPrint(offsets.length.toString() + " " + colors.length.toString());
     for (int i = 0; i < offsets.length - 1; i++) {
       if (offsets[i] != null && offsets[i + 1] != null) {
+        brush.color = colors[i] == null ? Colors.red : colors[i];
         canvas.drawLine(offsets[i], offsets[i + 1], brush);
       }
     }
