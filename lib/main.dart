@@ -65,25 +65,28 @@ class _MainViewState extends State<MainView> {
                 offsets: _offsets, colors: _colors, brushSizes: _brushSizes),
             size: Size.infinite,
           ),
-          new ListTile(
-            title: new ColorBoxGroup(
-              width: 25.0,
-              height: 25.0,
-              spacing: 10.0,
-              colors: [
-                Colors.red,
-                Colors.orange,
-                Colors.green,
-                Colors.purple,
-                Colors.blue,
-                Colors.yellow,
-              ],
-              groupValue: activeColor,
-              onTap: (color) {
-                setState(() {
-                  onChangeColor(color);
-                });
-              },
+          SafeArea(
+            top: true,
+            child: new ListTile(
+              title: new ColorBoxGroup(
+                width: 25.0,
+                height: 25.0,
+                spacing: 10.0,
+                colors: [
+                  Colors.red,
+                  Colors.orange,
+                  Colors.green,
+                  Colors.purple,
+                  Colors.blue,
+                  Colors.yellow,
+                ],
+                groupValue: activeColor,
+                onTap: (color) {
+                  setState(() {
+                    onChangeColor(color);
+                  });
+                },
+              ),
             ),
           ),
           Align(
